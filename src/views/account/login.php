@@ -42,8 +42,13 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Captcha</label>
-                    <img src="/account/captcha" alt="Captcha" class="mb-2">
-                    <input type="text" class="form-control" name="captcha_input" id="captcha" placeholder="Введите символы с картинки">
+                    <div class="mb-2">
+                        <img src="/account/captcha" alt="Captcha" id="captchaImage">
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="captcha_input" id="captcha" placeholder="Введите символы с картинки">
+                        <button type="button" class="btn btn-outline-secondary" onclick="refreshCaptcha()">Обновить</button>
+                    </div>
                 </div>
                 <div class="form-footer">
                     <button type="submit" class="btn btn-primary w-100">Авторизоваться</button>
@@ -99,4 +104,10 @@
             errorMessage.classList.add('d-none');
         }
     });
+
+    function refreshCaptcha() {
+        const captchaImage = document.getElementById('captchaImage');
+        const timestamp = new Date().getTime();
+        captchaImage.src = '/account/captcha?rand=' + timestamp;
+    }
 </script>
